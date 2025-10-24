@@ -1,5 +1,5 @@
 export class Turno {
-    id: number;
+    id?: string;
     nombre: string;
     apellido: string; 
     fecha: Date;

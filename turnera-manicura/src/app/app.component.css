@@ -1,0 +1,22 @@
+/* Contenedor del header */
+.header {
+  display: flex;          /* Para que estén en fila */
+  align-items: center;    /* Centrar verticalmente */
+  padding: 10px 20px;
+  background-color: #D9928A; /* Color de fondo del header */
+  gap: 10px;              /* Espacio entre logo y título */
+}
+
+/* Logo */
+.logo {
+  max-width: 50px;        /* Máximo ancho */
+  max-height: 50px;       /* Máximo alto */
+  object-fit: contain;    /* Mantiene proporción */
+}
+
+/* Título */
+.titulo {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0;
+}

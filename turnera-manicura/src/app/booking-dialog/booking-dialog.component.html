@@ -1,0 +1,25 @@
+<div class="dialog-backdrop">
+  <div class="dialog-card">
+    <h2>Reservar turno - {{ turno.servicio }}</h2>
+
+    <label>Nombre:</label>
+    <input [(ngModel)]="turno.nombre" />
+
+    <label>Apellido:</label>
+    <input [(ngModel)]="turno.apellido" />
+
+    <label>Fecha:</label>
+    <input type="date" [(ngModel)]="turno.fecha" />
+
+    <label>Hora:</label>
+    <input type="time" [(ngModel)]="turno.hora" />
+
+    <label>Con quién:</label>
+    <input [(ngModel)]="turno.conQuien" />
+
+    <div class="mt-4 flex justify-end gap-2">
+      <button (click)="submit()" class="reservar-turno">Confirmar</button>
+      <button (click)="close.emit()" class="secondary-button">Cancelar</button>
+    </div>
+  </div>
+</div>
