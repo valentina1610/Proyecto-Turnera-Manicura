@@ -1,17 +1,21 @@
+// Importa el decorador Injectable de Angular
+// Permite que este servicio pueda inyectarse en otros componentes o servicios
 import { Injectable } from '@angular/core';
-// Es para poder inyectar este servicio en cualquier componente de Angular
 
+// Importa la clase Turno, que define la estructura del objeto turno
 import { Turno } from 'src/app/model/turno';
-// Importamos la clase Turno que define la estructura de un turno
 
+// Decorador @Injectable: convierte esta clase en un servicio inyectable
 @Injectable({
-  providedIn: 'root'
-  // Esto hace que Angular cree una única instancia global de este servicio
-  // que puede ser usada en cualquier parte de la aplicación
+  providedIn: 'root' 
+  // 'providedIn: root' indica que Angular creará una única instancia global del servicio
+  // y la compartirá en toda la aplicación (patrón Singleton)
 })
 export class TurnoService {
-  private arrayTurno: Turno[] = [ //  // Array privado que contiene todos los turnos
-    //Dos turnos de ejemplo: 
+
+  // Array privado que contiene todos los turnos (la “base de datos” local en memoria)
+  private arrayTurno: Turno[] = [
+    // Dos turnos de ejemplo cargados por defecto
     Object.assign(new Turno(), {
       id: 1,
       nombre: 'Pamela',
@@ -32,43 +36,52 @@ export class TurnoService {
     })
   ];
 
-  //-----ABM------
+  // ---------- MÉTODOS CRUD (ABM) ----------
 
-  //Devuelve todos los turnos: (CONSULTA)
+  // 📘 CONSULTA: Devuelve todos los turnos
   getTurnos(): Turno[] {
-  // Retorna una copia del array
+    // Retorna una copia del array original (spread operator [...])
+    // para evitar que el componente pueda modificarlo directamente
     return [...this.arrayTurno];
   }
-   //Devuelve un turno por ID: (CONSULTA)
-   getTurnoByID(id : number): Turno | undefined {
-    // Busca el primer turno que tenga el ID solicitado
-    // Si no encuentra ninguno, devuelve undefined
+
+  // 📘 CONSULTA: Devuelve un turno según su ID
+  getTurnoByID(id: number): Turno | undefined {
+    // Busca el turno con el ID recibido
+    // Si no lo encuentra, devuelve undefined
     return this.arrayTurno.find(t => t.id === id);
   }
 
-  // Agrega un turno nuevo al arreglo (ALTA)
+  // ➕ ALTA: Agrega un nuevo turno
   addTurno(turno: Turno): void {
-    // Asigna un ID automático: si hay turnos, suma 1 al último ID; si no, empieza en 1
-    turno.id = this.arrayTurno.length > 0 ? this.arrayTurno[this.arrayTurno.length - 1].id + 1 : 1;
+    // Asigna un ID automático:
+    // Si ya existen turnos, toma el ID del último y le suma 1; si no, empieza desde 1
+    turno.id = this.arrayTurno.length > 0 
+      ? this.arrayTurno[this.arrayTurno.length - 1].id! + 1 
+      : 1;
 
-    // Agrega el turno al arreglo interno (push=add)
+    // Agrega el turno al array interno
     this.arrayTurno.push(turno);
   }
-  //Actualiza un turno existente (MODIFICACION)
+
+  // ✏️ MODIFICACIÓN: Actualiza un turno existente
   updateTurno(turno: Turno): void {
-      // Busca el índice del turno con el mismo ID. Si no lo encuentra, devuelve -1.
-      const index = this.arrayTurno.findIndex(t => t.id === turno.id);
-      // Si lo encuentra, reemplaza el turno viejo por el nuevo
-  if (index !== -1) {
-    this.arrayTurno[index] = turno;
-  }
-  // Si no encuentra el ID, no hace nada
+    // Busca el índice del turno con el mismo ID
+    const index = this.arrayTurno.findIndex(t => t.id === turno.id);
+
+    // Si lo encuentra, reemplaza el turno viejo por el nuevo
+    if (index !== -1) {
+      this.arrayTurno[index] = turno;
+    }
+    // Si no lo encuentra, no hace nada
   }
 
-  //Elimina un turno (BAJA)
+  // ❌ BAJA: Elimina un turno según su ID
   deleteTurno(id: number): void {
-      this.arrayTurno = this.arrayTurno.filter(t => t.id !== id);
-
+    // Filtra el array dejando solo los turnos cuyo ID sea distinto al recibido
+    this.arrayTurno = this.arrayTurno.filter(t => t.id !== id);
   }
+
+  // Constructor vacío (podría usarse para inyectar dependencias si hiciera falta)
   constructor() { }
 }

@@ -1,22 +1,22 @@
 /* Contenedor del header */
 .header {
-  display: flex;          /* Para que estén en fila */
-  align-items: center;    /* Centrar verticalmente */
-  padding: 10px 20px;
-  background-color: #D9928A; /* Color de fondo del header */
-  gap: 10px;              /* Espacio entre logo y título */
+  display: flex;            /* Organiza los elementos hijos en fila (horizontales) */
+  align-items: center;      /* Centra verticalmente los elementos dentro del header */
+  padding: 10px 20px;       /* Espacio interno: 10px arriba/abajo, 20px izquierda/derecha */
+  background-color: #D9928A;/* Color de fondo del header (rosa/coral) */
+  gap: 10px;                /* Espacio horizontal entre los elementos hijos (logo y título) */
 }
 
-/* Logo */
+/* Logo dentro del header */
 .logo {
-  max-width: 50px;        /* Máximo ancho */
-  max-height: 50px;       /* Máximo alto */
-  object-fit: contain;    /* Mantiene proporción */
+  max-width: 50px;          /* Ancho máximo permitido para la imagen */
+  max-height: 50px;         /* Alto máximo permitido para la imagen */
+  object-fit: contain;      /* Mantiene la proporción original de la imagen */
 }
 
-/* Título */
+/* Título del header */
 .titulo {
-  font-size: 24px;
-  font-weight: bold;
-  margin: 0;
+  font-size: 24px;          /* Tamaño de letra grande para destacar el título */
+  font-weight: bold;        /* Texto en negrita */
+  margin: 0;                /* Quita el margen por defecto de los títulos */
 }
